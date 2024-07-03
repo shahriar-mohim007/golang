@@ -52,7 +52,12 @@ func main() {
 		logger.Fatal(err)
 	}
 
-	defer db.Close()
+	defer func(db *sql.DB) {
+		err := db.Close()
+		if err != nil {
+
+		}
+	}(db)
 	logger.Printf("database connection pool established")
 
 	app := &application{
