@@ -1,9 +1,12 @@
 package main
 
 import (
+	"flag"
 	"fmt"
+	"go_programming/Interfaces"
 	"go_programming/Methods"
 	"image/color"
+	"io"
 )
 
 func main() {
@@ -92,5 +95,39 @@ func main() {
 	fmt.Println(s.Has(1))
 	fmt.Println(s.Has(144))
 	fmt.Println(s.Has(100))
+
+	var c Interfaces.ByteCounter
+	text := "Hello, world!"
+	bytesWritten, _ := fmt.Fprintf(&c, "%s", text)
+	fmt.Printf("Bytes written: %d\n", bytesWritten)
+	fmt.Printf("Total bytes counted: %d\n", c.Count)
+
+	rwc := &Interfaces.MyReadWriteCloser{Data: "Hello, World!"}
+	buf := make([]byte, 5)
+
+	n, err := rwc.Read(buf)
+	if err != nil && err != io.EOF {
+		fmt.Printf("Read error: %v\n", err)
+		return
+	}
+	fmt.Printf("Read %d bytes: %s\n", n, string(buf))
+
+	_, err = rwc.Write([]byte(" Go!"))
+	if err != nil {
+		fmt.Printf("Write error: %v\n", err)
+		return
+	}
+	fmt.Printf("Data after write: %s\n", rwc.Data)
+
+	err = rwc.Close()
+	if err != nil {
+		fmt.Printf("Close error: %v\n", err)
+		return
+	}
+	fmt.Printf("Data after close: %s\n", rwc.Data)
+
+	temp := Interfaces.CelsiusFlag("temp", 20.0, "the temperature")
+	flag.Parse()
+	fmt.Println(*temp)
 
 }
