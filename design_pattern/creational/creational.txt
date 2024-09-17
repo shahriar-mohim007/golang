@@ -1,0 +1,3 @@
+Creational design patterns are a category of design patterns in object-oriented programming that deal with object creation mechanisms.
+They aim to abstract the instantiation process, helping to make a system independent of how its objects are created, composed, 
+and represented. This provides flexibility in terms of object creation, which can be beneficial when the system evolves or scales.

@@ -1,0 +1,1 @@
+Structural Design Patterns deal with the composition of classes and objects. They focus on how different classes and objects are organized to form larger structures while ensuring flexibility and efficiency. The goal is to create structures that make the design easier to understand, maintain, and extend.

@@ -1,0 +1,29 @@
+Flyweight: Shares common parts of objects to save memory.
+
+Reduces the number of objects created by sharing common parts of objects instead of creating new ones. This pattern is useful for optimizing memory usage when working with a large number of similar objects.ChatGPT
+
+The Flyweight Design Pattern is a structural design pattern aimed at reducing the memory usage of objects by sharing as many data as possible with similar objects. This is especially useful when dealing with a large number of objects that have many shared characteristics.
+
+Components
+
+    Flyweight Interface: Declares methods that can be used by clients to interact with Flyweight objects.
+
+    Concrete Flyweight: Implements the Flyweight interface and maintains the intrinsic state (shared data) that is common across objects.
+
+    Flyweight Factory: Manages the creation and reuse of Flyweight objects. It ensures that Flyweight objects are shared properly and can return existing instances if they already exist.
+
+    Client: Uses Flyweight objects and manages the extrinsic state (unique data) that is specific to individual objects and cannot be shared.
+
+Example: In a word processor, instead of creating separate objects for every occurrence of each letter, a flyweight pattern can share objects for the same letter to save memory.
+
+
+Consider a scenario where you are creating a text editor that needs to handle a large number of characters. Each character might have properties like font, size, and color. Instead of creating a new object for each character, which can consume a lot of memory, you can use the Flyweight Pattern to share common properties and manage individual differences separately.
+
+
+
+Explanation
+
+    Flyweight Interface (Character): Defines the Display method that will be implemented by concrete Flyweight objects.
+    Concrete Flyweight (ConcreteCharacter): Implements the Character interface and stores the intrinsic state (character itself) that is shared.
+    Flyweight Factory (CharacterFactory): Manages and reuses Flyweight objects. It creates new ConcreteCharacter objects only if they do not already exist in the characters map.
+    Client: Uses the factory to get ConcreteCharacter instances and applies extrinsic state (font, size, color) to them.

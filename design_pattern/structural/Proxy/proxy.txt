@@ -1,0 +1,17 @@
+Proxy Pattern:
+
+    Provides a surrogate or placeholder for another object to control access to it. This pattern is useful when the real object is resource-intensive, and you want to delay its creation until it's actually needed.
+    Example: A virtual proxy might delay the loading of an image until it’s actually needed, instead of loading it immediately.
+
+
+Explanation
+
+    Subject Interface (Document): Defines the Read() method that both the RealSubject and Proxy will implement.
+    RealSubject (SensitiveDocument): Represents the actual document with sensitive content. It implements the Read() method.
+    Proxy (DocumentProxy): Controls access to the SensitiveDocument. It checks the user's role before allowing access to the document content. If the user is an admin, the document is loaded and read; otherwise, access is denied.
+
+Benefits
+
+    Access Control: The Proxy ensures that only users with the appropriate permissions can access sensitive documents.
+    Lazy Initialization: The SensitiveDocument is only loaded when necessary, which can save resources and improve performance.
+    Separation of Concerns: The Proxy handles access control logic separately from the document content, making the system more modular and maintainable.

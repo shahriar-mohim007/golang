@@ -1,0 +1,5 @@
+Composite Pattern:
+
+    Composes objects into tree-like structures to represent part-whole hierarchies. This pattern allows individual objects and groups of objects to be treated uniformly.
+    The Composite Design Pattern is a structural pattern used to treat individual objects and compositions of objects uniformly. It is especially useful when you have a hierarchy of objects, where some are simple and others are made of multiple parts (composites)
+    Example: A file system where files and directories can be treated the same way. A directory can contain files or other directories, forming a tree structure.

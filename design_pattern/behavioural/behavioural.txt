@@ -1,0 +1,1 @@
+Behavioral Design Patterns focus on how objects interact and communicate with each other. These patterns help manage complex flows and define the responsibilities between objects, making interactions more flexible and efficient.

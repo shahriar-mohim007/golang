@@ -1,0 +1,7 @@
+Adapter Pattern:
+
+    Converts the interface of a class into another interface that the client expects. This pattern allows incompatible interfaces to work together.
+    Example: If you have a legacy system that outputs XML, but your application only works with JSON, you can create an adapter to convert XML to JSON.
+
+
+Example: Suppose you have a LegacyPrinter that prints in a specific format, and you want to adapt it to work with a new Printer interface.

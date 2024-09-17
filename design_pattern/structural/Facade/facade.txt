@@ -1,0 +1,13 @@
+Facade Pattern:
+
+    Provides a simplified interface to a complex subsystem, making it easier to use. It hides the complexities of the system and provides a unified interface to the client.
+    Example: A home entertainment system that has a facade to turn on the TV, sound system, and DVD player with one call, instead of separate calls to each device.
+
+
+The Facade Design Pattern is a structural pattern that provides a simplified interface to a complex system of classes, libraries, or frameworks. It hides the complexity by offering a single entry point (or "facade") to the system, making it easier to interact with.
+Key Idea
+
+The main goal of the Facade Pattern is to provide a straightforward, unified interface that simplifies the interactions with complex subsystems. Instead of a client dealing with multiple classes and their interactions, the client just interacts with a single facade class.
+Example Scenario
+
+Imagine you want to start a home theater system that involves a TV, speakers, DVD player, and lights. Each component has its own complicated setup process. Instead of calling methods on each of these components individually, you can create a Facade that provides a simple startMovie() method to handle everything for you.

@@ -1,0 +1,9 @@
+Decorator Pattern
+
+Purpose: Add responsibilities to objects dynamically.
+
+Example: Add extra features to a basic Coffee object.
+
+Adds behavior or responsibilities to individual objects dynamically, without affecting other objects of the same class.
+This pattern is useful for extending object functionality without modifying the object’s class.
+Example: Adding scrollbars to a window object without altering the window class itself.
