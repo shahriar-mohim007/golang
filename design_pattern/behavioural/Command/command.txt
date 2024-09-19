@@ -1,0 +1,7 @@
+The Command Pattern is a behavioral design pattern where you encapsulate a request as an object, allowing you to parameterize other objects with operations, queue requests, and support undoable operations.
+Key Concepts:
+
+    Command Interface: Defines the method that encapsulates the action.
+    Concrete Command: Implements the command by binding actions to specific receivers.
+    Invoker: The object that triggers the command execution.
+    Receiver: The object that knows how to perform the action.

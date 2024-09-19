@@ -1,0 +1,14 @@
+The Mediator Pattern is a behavioral design pattern that promotes loose coupling between objects by introducing a mediator to handle communication between them. Instead of objects referring to each other directly, they communicate through a mediator, reducing dependencies and improving maintainability.
+Key Concepts:
+
+    Mediator Interface: Declares a method to facilitate communication between different objects.
+    Concrete Mediator: Implements the mediator interface and coordinates the interaction between objects.
+    Colleagues: The objects that need to communicate with each other, but do so through the mediator.
+
+
+
+Explanation:
+
+    Mediator (ChatRoom): Manages communication between the users. When a user sends a message, the mediator broadcasts it to all other users.
+    Colleagues (User): Users communicate through the chat room, not directly with each other.
+    Decoupling: Users don’t need to know about each other; they only know about the chat room (mediator).

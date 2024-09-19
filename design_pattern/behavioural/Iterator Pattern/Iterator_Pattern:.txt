@@ -1,0 +1,7 @@
+The Iterator Pattern is a behavioral design pattern that provides a way to sequentially access elements of a collection without exposing its underlying structure. It is particularly useful when you need to traverse a collection (like a list, array, or map) in a uniform way.
+Key Concepts:
+
+    Iterator: An interface that defines methods for traversing a collection.
+    Concrete Iterator: Implements the iterator interface and keeps track of the current position in the collection.
+    Aggregate: The collection (like an array or list) that the iterator will traverse.
+    Concrete Aggregate: The actual collection that creates the iterator.

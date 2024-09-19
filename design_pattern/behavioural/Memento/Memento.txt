@@ -1,0 +1,14 @@
+The Memento Pattern is a behavioral design pattern that allows you to save and restore an object's state without exposing its internal details. It's useful when you need to implement undo/redo functionality.
+Key Concepts:
+
+    Memento: Holds the state of an object that can be restored later.
+    Originator: The object whose state you want to save and restore.
+    Caretaker: Manages the mementos but doesn’t modify them. It saves and restores the originator's state using mementos.
+
+
+
+Explanation:
+
+    Memento: Stores the state of the TextEditor (the content).
+    Originator (TextEditor): The object whose state we want to save and restore. It can create mementos and restore its state from a memento.
+    Caretaker: Saves the history of states (mementos) and allows the originator to restore previous states.
