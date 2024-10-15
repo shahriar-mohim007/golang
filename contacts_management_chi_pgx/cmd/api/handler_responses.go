@@ -10,6 +10,22 @@ var ValidDataNotFound = utilis.ResponseState{
 	Message:    "The provided information is invalid. Please recheck and try again.",
 }
 
+var InvalidEmailPassword = utilis.ResponseState{
+	StatusCode: http.StatusUnauthorized,
+	Message:    "Invalid email or password",
+}
+var UserNotActive = utilis.ResponseState{
+	StatusCode: http.StatusUnauthorized,
+	Message:    "User not active",
+}
+var InternalError = utilis.ResponseState{
+	StatusCode: http.StatusInternalServerError,
+	Message:    "Internal server error",
+}
+var Unauthorized = utilis.ResponseState{
+	StatusCode: http.StatusUnauthorized,
+	Message:    "Unauthorized user",
+}
 var UserAlreadyExist = utilis.ResponseState{
 	StatusCode: http.StatusBadRequest,
 	Message:    "User Already Exist With this Email",
@@ -39,8 +55,15 @@ var ContactCreated = utilis.ResponseState{
 	StatusCode: http.StatusCreated,
 	Message:    "Contacts Created successfully",
 }
-
+var NotFound = utilis.ResponseState{
+	StatusCode: http.StatusNotFound,
+	Message:    "Contact Not found",
+}
 var ContactUpdated = utilis.ResponseState{
 	StatusCode: http.StatusCreated,
 	Message:    "Contacts Updated successfully",
+}
+var RateLimitExceeded = utilis.ResponseState{
+	StatusCode: http.StatusTooManyRequests,
+	Message:    "Rate Limit Exceeded",
 }

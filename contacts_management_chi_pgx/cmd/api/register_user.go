@@ -6,45 +6,47 @@ import (
 	"database/sql"
 	"encoding/json"
 	"fmt"
+	"github.com/go-playground/validator/v10"
 	"github.com/gofrs/uuid"
 	"github.com/pkg/errors"
 	"net/http"
 	"time"
 )
 
-type requestPayload struct {
-	Name     string `json:"name"`
-	Email    string `json:"email"`
-	Password string `json:"password"`
+type RegistrationRequestPayload struct {
+	Name     string `json:"name" validate:"required"`
+	Email    string `json:"email" validate:"required,email"`
+	Password string `json:"password" validate:"required,min=6"`
 }
 
-type responsePayload struct {
+type RegistrationResponsePayload struct {
 	ActivateToken string `json:"activate_token"`
 }
 
 func (app *application) handleRegisterUser(w http.ResponseWriter, req *http.Request) {
 
-	defer func() {
-		if r := recover(); r != nil {
-			app.logger.PrintError(fmt.Errorf("recovered from panic: %v", r), map[string]string{
-				"context": "panic recovery",
-			})
-			http.Error(w, "Internal Server Error", http.StatusInternalServerError)
-		}
-	}()
-
-	request := requestPayload{}
+	request := RegistrationRequestPayload{}
 	ctx := req.Context()
 	err := json.NewDecoder(req.Body).Decode(&request)
 
-	if err != nil || request.Name == "" || request.Email == "" || request.Password == "" {
-
+	if err != nil {
 		app.logger.PrintError(err, map[string]string{
-			"context": "Invalid input",
+			"context": "Invalid JSON",
 		})
 		_ = ValidDataNotFound.WriteToResponse(w, nil)
 		return
 	}
+	validate := validator.New()
+
+	err = validate.Struct(request)
+	if err != nil {
+		app.logger.PrintError(err, map[string]string{
+			"context": "Invalid payload",
+		})
+		_ = ValidDataNotFound.WriteToResponse(w, nil)
+		return
+	}
+
 	user, err := app.Repository.GetUserByEmail(ctx, request.Email)
 
 	if err != nil {
@@ -57,7 +59,7 @@ func (app *application) handleRegisterUser(w http.ResponseWriter, req *http.Requ
 			app.logger.PrintError(err, map[string]string{
 				"context": "Error fetching user by email",
 			})
-			http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+			_ = InternalError.WriteToResponse(w, nil)
 			return
 		}
 	}
@@ -77,14 +79,14 @@ func (app *application) handleRegisterUser(w http.ResponseWriter, req *http.Requ
 			"context": "Failed to hash password",
 		})
 
-		http.Error(w, "Error hashing password", http.StatusInternalServerError)
+		_ = InternalError.WriteToResponse(w, nil)
 		return
 	}
 
 	userID, err := uuid.NewV4()
 
 	if err != nil {
-		http.Error(w, "Error Generating Id", http.StatusInternalServerError)
+		_ = InternalError.WriteToResponse(w, nil)
 		return
 	}
 
@@ -100,7 +102,7 @@ func (app *application) handleRegisterUser(w http.ResponseWriter, req *http.Requ
 		app.logger.PrintError(err, map[string]string{
 			"context": "Failed to create user",
 		})
-		http.Error(w, "Error creating user", http.StatusInternalServerError)
+		_ = InternalError.WriteToResponse(w, nil)
 		return
 	}
 
@@ -113,11 +115,11 @@ func (app *application) handleRegisterUser(w http.ResponseWriter, req *http.Requ
 			"context": "Failed to activation token",
 		})
 
-		http.Error(w, "Error creating activation token", http.StatusInternalServerError)
+		_ = InternalError.WriteToResponse(w, nil)
 		return
 	}
 
-	response := responsePayload{
+	response := RegistrationResponsePayload{
 		ActivateToken: token,
 	}
 
