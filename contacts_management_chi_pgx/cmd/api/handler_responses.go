@@ -67,3 +67,8 @@ var RateLimitExceeded = utilis.ResponseState{
 	StatusCode: http.StatusTooManyRequests,
 	Message:    "Rate Limit Exceeded",
 }
+
+var BadRequestError = utilis.ResponseState{
+	StatusCode: http.StatusBadRequest,
+	Message:    "Bad Request",
+}

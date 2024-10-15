@@ -46,6 +46,7 @@ func (app *application) AuthMiddleware(next http.Handler) http.Handler {
 	})
 
 }
+
 func (app *application) RateLimitMiddleware(next http.Handler) http.Handler {
 
 	type client struct {
@@ -73,7 +74,7 @@ func (app *application) RateLimitMiddleware(next http.Handler) http.Handler {
 	}()
 
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		if app.config.Limiter.Enabled {
+		if app.config.LimiterEnabled {
 			ip, _, err := net.SplitHostPort(r.RemoteAddr)
 			if err != nil {
 				app.logger.PrintError(err, map[string]string{
@@ -87,8 +88,8 @@ func (app *application) RateLimitMiddleware(next http.Handler) http.Handler {
 			if _, found := clients[ip]; !found {
 				clients[ip] = &client{
 					limiter: rate.NewLimiter(
-						rate.Limit(app.config.Limiter.Rps),
-						app.config.Limiter.Burst),
+						rate.Limit(app.config.Rps),
+						app.config.Burst),
 				}
 			}
 

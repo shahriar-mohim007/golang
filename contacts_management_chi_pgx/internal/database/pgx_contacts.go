@@ -69,8 +69,13 @@ func (repo *PgxRepository) ActivateUserByID(ctx context.Context, userID uuid.UUI
 	return err
 }
 
-func (repo *PgxRepository) GetAllContacts(ctx context.Context, userID uuid.UUID) ([]domain.Contact, error) {
-	rows, err := repo.db.Query(ctx, "SELECT id, phone, street, city, state, zip_code, country FROM contacts WHERE user_id = $1", userID)
+func (repo *PgxRepository) GetAllContacts(ctx context.Context, userID uuid.UUID, limit, offset int) ([]domain.Contact, error) {
+	query := `
+		SELECT id, phone, street, city, state, zip_code, country 
+		FROM contacts 
+		WHERE user_id = $1 
+		LIMIT $2 OFFSET $3`
+	rows, err := repo.db.Query(ctx, query, userID, limit, offset)
 	if err != nil {
 		return nil, err
 	}
@@ -206,4 +211,18 @@ func (repo *PgxRepository) DeleteContactByID(ctx context.Context, contactID uuid
 	}
 
 	return nil
+}
+
+func (repo *PgxRepository) GetContactsCount(ctx context.Context, userID uuid.UUID) (int, error) {
+	query := `
+		SELECT COUNT(*) 
+		FROM contacts 
+		WHERE user_id = $1`
+
+	var count int
+	err := repo.db.QueryRow(ctx, query, userID).Scan(&count)
+	if err != nil {
+		return 0, err
+	}
+	return count, nil
 }

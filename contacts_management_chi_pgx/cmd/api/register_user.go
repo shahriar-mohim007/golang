@@ -51,10 +51,7 @@ func (app *application) handleRegisterUser(w http.ResponseWriter, req *http.Requ
 
 	if err != nil {
 		if errors.Is(err, sql.ErrNoRows) {
-			app.logger.PrintError(fmt.Errorf("user with email %s not found", request.Email), map[string]string{
-				"context": "user lookup",
-				"email":   request.Email,
-			})
+			app.logger.PrintInfo(fmt.Sprintf("user with email %s not found", request.Email), map[string]string{})
 		} else {
 			app.logger.PrintError(err, map[string]string{
 				"context": "Error fetching user by email",
