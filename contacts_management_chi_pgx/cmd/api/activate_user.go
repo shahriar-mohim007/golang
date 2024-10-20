@@ -31,7 +31,7 @@ func (app *application) handleActivateUser(w http.ResponseWriter, req *http.Requ
 		app.logger.PrintError(err, map[string]string{
 			"context": "invalid token",
 		})
-		_ = InternalError.WriteToResponse(w, nil)
+		_ = InvalidToken.WriteToResponse(w, nil)
 		return
 	}
 

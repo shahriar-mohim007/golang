@@ -18,6 +18,10 @@ var UserNotActive = utilis.ResponseState{
 	StatusCode: http.StatusUnauthorized,
 	Message:    "User not active",
 }
+var InvalidToken = utilis.ResponseState{
+	StatusCode: http.StatusUnauthorized,
+	Message:    "Invalid token",
+}
 var InternalError = utilis.ResponseState{
 	StatusCode: http.StatusInternalServerError,
 	Message:    "Internal server error",

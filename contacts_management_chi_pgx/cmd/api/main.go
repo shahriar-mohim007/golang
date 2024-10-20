@@ -20,6 +20,12 @@ func main() {
 	cfg := config.LoadConfig()
 	logger := jsonlog.New(os.Stdout, jsonlog.LevelInfo)
 	db, err := repository.NewPgRepository(cfg.DataBaseUrl)
+	if err != nil {
+		logger.PrintError(err, map[string]string{
+			"context": "initializing the database",
+		})
+		os.Exit(1)
+	}
 
 	app := &application{
 		config:     cfg,
