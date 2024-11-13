@@ -1,4 +1,5 @@
-//package main
+package main
+
 //
 //import (
 //	"fmt"
@@ -53,33 +54,33 @@
 //	fmt.Printf("Go is using %d cores\n", cores)
 //}
 
-package main
-
-import (
-	"fmt"
-	"runtime"
-	"sync"
-)
-
-func factorial(n int, wg *sync.WaitGroup) {
-	defer wg.Done()
-	result := 1
-	for i := 1; i <= n; i++ {
-		result *= i
-	}
-	fmt.Printf("Factorial of %d is %d\n", n, result)
-}
-
-func main() {
-	runtime.GOMAXPROCS(runtime.NumCPU()) // Utilize all available CPU cores
-	var wg sync.WaitGroup
-
-	numbers := []int{20, 7, 9, 11, 12, 3, 10, 5}
-
-	for _, num := range numbers {
-		wg.Add(1)
-		go factorial(num, &wg) // Run factorial computations in parallel
-	}
-
-	wg.Wait() // Wait for all goroutines to finish
-}
+//package main
+//
+//import (
+//	"fmt"
+//	"runtime"
+//	"sync"
+//)
+//
+//func factorial(n int, wg *sync.WaitGroup) {
+//	defer wg.Done()
+//	result := 1
+//	for i := 1; i <= n; i++ {
+//		result *= i
+//	}
+//	fmt.Printf("Factorial of %d is %d\n", n, result)
+//}
+//
+//func main() {
+//	runtime.GOMAXPROCS(runtime.NumCPU()) // Utilize all available CPU cores
+//	var wg sync.WaitGroup
+//
+//	numbers := []int{20, 7, 9, 11, 12, 3, 10, 5}
+//
+//	for _, num := range numbers {
+//		wg.Add(1)
+//		go factorial(num, &wg) // Run factorial computations in parallel
+//	}
+//
+//	wg.Wait() // Wait for all goroutines to finish
+//}
